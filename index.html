@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>Bravospeed</title>
+
+
+<script type="text/javascript">
+	function getFirstBrowserLanguage() {
+        var nav = window.navigator,
+            browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage'],
+            i,
+            language,
+            len,
+            shortLanguage = null;
+
+        // support for HTML 5.1 "navigator.languages"
+        if (Array.isArray(nav.languages)) {
+            for (i = 0; i < nav.languages.length; i++) {
+                language = nav.languages[i];
+                len = language.length;
+                if (!shortLanguage && len) {
+                    shortLanguage = language;
+                }
+                if (language && len>2) {
+                    return language;
+                }
+            }
+        }
+
+        // support for other well known properties in browsers
+        for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
+            language = nav[browserLanguagePropertyKeys[i]];
+            //skip this loop iteration if property is null/undefined.  IE11 fix.
+            if (language == null) { continue; } 
+            len = language.length;
+            if (!shortLanguage && len) {
+                shortLanguage = language;
+            }
+            if (language && len > 2) {
+                return language;
+            }
+        }
+
+        return shortLanguage;
+    }
+
+
+var langue = getFirstBrowserLanguage();
+//console.log(langue);
+
+if(langue == 'en-US' || langue == 'en-CA')
+{
+	document.location.href = 'us/index.html'
+}
+
+else if(langue == 'en-gb' || langue == 'en-IE'){
+ document.location.href = 'uk/index.html';
+}
+
+else if(langue == 'de' || langue == 'de-AT' || langue == 'de-LI' || langue == 'de-CH' || langue == 'de-LU'){
+ document.location.href = 'de/index.html';
+}
+
+else if(langue == 'fr' || langue == 'fr-FR' || langue == 'fr-BE'){
+	document.location.href = 'fr/index.html';
+}
+
+</script>
+
+
+</head>
+<body>
+
+</body>
+</html>
